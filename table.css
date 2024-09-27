@@ -1,4 +1,4 @@
-table tr:first-child{
+thead tr{
     background-color: rgb(255, 238, 0);
     font-weight: bold;
 }
@@ -7,7 +7,7 @@ tr{
     background-color: blanchedalmond;
 }
  
-tr:not(:first-child):hover{
+tbody tr:hover{
     background-color: rgb(0, 255, 98);
 }
  
@@ -18,4 +18,5 @@ tr:nth-child(2n){
 table{
     border: black 1px solid;
     text-align: center;
+    border-collapse: collapse;
 }
