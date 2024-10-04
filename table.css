@@ -20,3 +20,7 @@ table{
     text-align: center;
     border-collapse: collapse;
 }
+
+.selected{
+    transform: scale(1.2);
+}

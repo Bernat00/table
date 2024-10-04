@@ -41,7 +41,7 @@ for(let line of array){
     const row = document.createElement('tr');
     const ln = document.createElement('td');
     const fn1 = document.createElement('td');
-    
+
     ln.innerHTML = line.lastname;
     fn1.innerHTML = line.firstname1;
     
@@ -59,7 +59,13 @@ for(let line of array){
         fn1.colSpan = 2;
     }
 
+    row.addEventListener('click', function (e) {
+        let selected = tableBody.querySelector('.selected');
+        if(selected)
+            selected.classList.remove('selected');
+
+        e.currentTarget.classList.add('selected');
+    });
 };
 
 document.body.appendChild(table);
-
