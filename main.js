@@ -30,8 +30,8 @@ const tableHeaderLastName = document.createElement('th');
 table.appendChild(tableHeader);
 table.appendChild(tableBody);
 tableHeader.appendChild(tableHeaderRow);
-tableHeaderRow.appendChild(tableHeaderFhirstName);
 tableHeaderRow.appendChild(tableHeaderLastName);
+tableHeaderRow.appendChild(tableHeaderFhirstName);
 
 tableHeaderFhirstName.innerHTML = 'Keresztnév';
 tableHeaderLastName.innerHTML = 'Vezetékév';
@@ -39,14 +39,14 @@ tableHeaderFhirstName.colSpan = 2;
 
 for(let line of array){
     const row = document.createElement('tr');
-    tableBody.appendChild(row);
-
     const ln = document.createElement('td');
-    ln.innerHTML = line.lastname;
-    row.appendChild(ln);    
-
     const fn1 = document.createElement('td');
+    
+    ln.innerHTML = line.lastname;
     fn1.innerHTML = line.firstname1;
+    
+    tableBody.appendChild(row);
+    row.appendChild(ln);    
     row.appendChild(fn1);
 
 
@@ -56,7 +56,7 @@ for(let line of array){
         row.appendChild(fn2);
     }
     else {
-        ln.colSpan = 2;
+        fn1.colSpan = 2;
     }
 
 };
