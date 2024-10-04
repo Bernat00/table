@@ -60,7 +60,7 @@ for(let line of array){
 
     ln.innerHTML = line.lastname;
     fn1.innerHTML = line.firstname1;
-    married.innerHTML = line.married;
+    married.innerHTML = line.married? 'Igen':'Nem';
     pet.innerHTML = line.pet;
     
     tableBody.appendChild(row);
@@ -80,7 +80,7 @@ for(let line of array){
     row.appendChild(married);
     row.appendChild(pet);
 
-    
+
     row.addEventListener('click', function (e) {
         let selected = tableBody.querySelector('.selected');
         if(selected)

@@ -19,6 +19,7 @@ table{
     border: black 1px solid;
     text-align: center;
     border-collapse: collapse;
+    margin: auto;
 }
 
 .selected{
