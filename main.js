@@ -31,7 +31,7 @@ let array = [
 
 function ReLoadTable(){
     if(document.getElementById('table'))
-        document.body.remove(document.getElementById('table'));
+        (document.getElementById('table')).remove();
 
     const table = document.createElement('table');
     const tableHeader = document.createElement('thead');
