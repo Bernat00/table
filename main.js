@@ -127,16 +127,50 @@ function FormHandle(e) {
     const marriedValue = married.checked;
     const petValue = pet.value;
 
-
-    array.push(
-        {
-            firstname1: firstname1Value,
-            firstname2: firstname2Value,
-            lastname: lastnameValue,
-            married: marriedValue,
-            pet: petValue
+    const fields = {
+        firstname1: firstname1Value,
+        firstname2: firstname2Value,
+        lastname: lastnameValue,
+        married: marriedValue,
+        pet: petValue
         }
-    );
+    
 
+    if(ValidateFields(lastname, firstname1, firstname2, pet)){
+        array.push(fields);      
+    }
+  
     ReLoadTable();
+}
+
+
+function ValidateFields(lastname, firstname1, firstname2, pet){
+    const lastnameErr = lastname.parentElement.querySelector('.error');
+    const firstname1Err = firstname1.parentElement.querySelector('.error');
+    const firstname2Err = firstname2.parentElement.querySelector('.error');
+    const petErr = pet.parentElement.querySelector('.error');
+
+
+    if(lastname.value === ''){
+        lastnameErr.innerHTML = '*A Vezetéknév kötelező!';
+        return false;
+    }
+    lastnameErr.innerHTML = '';
+
+    if(firstname1.value === ''){
+        firstname1Err.innerHTML = '*A keresztnév1 kötelező!'
+        return false;
+    }
+    firstname1Err.innerHTML = '';
+
+    if(pet.value === ''){
+        petErr.innerHTML = '*A háziállat kötelező!'
+        return false;
+    }
+    petErr.innerHTML = '';
+
+
+        firstname2Err.innerHTML = '';
+
+        return true;
 }
