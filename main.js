@@ -121,6 +121,9 @@ function FormHandle(e) {
     const married = document.getElementById('married');
     const pet = document.getElementById('pet');
 
+    // muszaj-e
+    firstname2.notReqired = true;
+
     const lastnameValue = lastname.value;
     const firstname1Value = firstname1.value;
     const firstname2Value = firstname2.value;
@@ -136,7 +139,14 @@ function FormHandle(e) {
         }
     
 
-    if(ValidateFields(lastname, firstname1, firstname2, pet)){
+    if(ValidateFields(
+        {
+        lastname: lastname,
+        firstname1: firstname1,
+        firstname2: firstname2,
+        pet: pet
+        }))
+    {
         array.push(fields);      
     }
   
@@ -144,33 +154,17 @@ function FormHandle(e) {
 }
 
 
-function ValidateFields(lastname, firstname1, firstname2, pet){
-    const lastnameErr = lastname.parentElement.querySelector('.error');
-    const firstname1Err = firstname1.parentElement.querySelector('.error');
-    const firstname2Err = firstname2.parentElement.querySelector('.error');
-    const petErr = pet.parentElement.querySelector('.error');
+function ValidateFields(fields){
+    for (const fieldName in fields) {
+        const field = fields[fieldName];
+        errorField = field.parentElement.querySelector('.error');
 
-
-    if(lastname.value === ''){
-        lastnameErr.innerHTML = '*A Vezetéknév kötelező!';
-        return false;
+        if(field.value === '' && !field.notReqired){
+            errorField.innerHTML = '*A' + field.name + 'kötelező!';
+            return false;
+        }
+        errorField.innerHTML = '';
     }
-    lastnameErr.innerHTML = '';
-
-    if(firstname1.value === ''){
-        firstname1Err.innerHTML = '*A keresztnév1 kötelező!'
-        return false;
-    }
-    firstname1Err.innerHTML = '';
-
-    if(pet.value === ''){
-        petErr.innerHTML = '*A háziállat kötelező!'
-        return false;
-    }
-    petErr.innerHTML = '';
-
-
-        firstname2Err.innerHTML = '';
-
+    
         return true;
 }
