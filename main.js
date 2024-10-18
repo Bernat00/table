@@ -109,8 +109,6 @@ const form = document.getElementById('form');
 form.addEventListener('submit', FormHandle);
 
 
-
-
 function FormHandle(e) {
     e.preventDefault();
     console.log(e);
@@ -155,16 +153,19 @@ function FormHandle(e) {
 
 
 function ValidateFields(fields){
+    let isGood = true;
+
     for (const fieldName in fields) {
         const field = fields[fieldName];
         errorField = field.parentElement.querySelector('.error');
 
         if(field.value === '' && !field.notReqired){
-            errorField.innerHTML = '*A' + field.name + 'kötelező!';
-            return false;
+            errorField.innerHTML = '*A ' + field.parentElement.querySelector('label').innerHTML + ' kötelező!';
+            isGood = false;
         }
-        errorField.innerHTML = '';
+        else
+            errorField.innerHTML = '';
     }
     
-        return true;
+        return isGood;
 }
