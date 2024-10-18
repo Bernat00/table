@@ -28,38 +28,54 @@ let array = [
     },
 ]
 
+/**
+ * 
+ * @param {'td'|'th'} tagName 
+ * @param {string} innerHTML 
+ * @param {HTMLElement} parent 
+ * @returns 
+ */
+function CreateTableCell(tagName, innerHTML = '', parent=document.body){
+    const element = document.createElement(tagName);
+    element.innerHTML = innerHTML;
+    parent.appendChild(element);
+
+    return element;
+}
+
 
 function ReLoadTable(){
     if(document.getElementById('table'))
         (document.getElementById('table')).remove();
 
-    const table = document.createElement('table');
+
+    const table = document.createElement('table')
     const tableHeader = document.createElement('thead');
     const tableBody = document.createElement('tbody');
     const tableHeaderRow = document.createElement('tr');
-    const tableHeaderFhirstName = document.createElement('th');
-    const tableHeaderLastName = document.createElement('th');
-    const tableHeaderMarried = document.createElement('th');
-    const tableHeaderPet = document.createElement('th');
     
+    document.body.appendChild(table);
     table.appendChild(tableHeader);
     table.appendChild(tableBody);
     tableHeader.appendChild(tableHeaderRow);
-    tableHeaderRow.appendChild(tableHeaderLastName);
-    tableHeaderRow.appendChild(tableHeaderFhirstName);
-    tableHeaderRow.appendChild(tableHeaderMarried);
-    tableHeaderRow.appendChild(tableHeaderPet);
-    
+
+
+    CreateTableCell('th', 'Keresztnév', tableHeaderRow);
+    CreateTableCell('th', 'Vezetékév', tableHeaderRow).colSpan = 2;
+    CreateTableCell('th', 'Házas-e?', tableHeaderRow);
+    CreateTableCell('th', 'Háziállat' ,tableHeaderRow);
+
     table.id = 'table';
-    tableHeaderFhirstName.innerHTML = 'Keresztnév';
-    tableHeaderLastName.innerHTML = 'Vezetékév';
-    tableHeaderMarried.innerHTML = 'Házas-e?';
-    tableHeaderPet.innerHTML = 'Háziállat';
-    tableHeaderFhirstName.colSpan = 2;
-    
+        
     
     for(let line of array){
+
+
         const row = document.createElement('tr');
+        tableBody.appendChild(row);
+
+
+
         const ln = document.createElement('td');
         const fn1 = document.createElement('td');
         const married = document.createElement('td');
@@ -70,7 +86,6 @@ function ReLoadTable(){
         married.innerHTML = line.married? 'Igen':'Nem';
         pet.innerHTML = line.pet;
         
-        tableBody.appendChild(row);
         row.appendChild(ln);    
         row.appendChild(fn1);
         
@@ -98,7 +113,6 @@ function ReLoadTable(){
     };
 
 
-    document.body.appendChild(table);
 }
 
 ReLoadTable();
