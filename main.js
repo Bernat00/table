@@ -133,8 +133,6 @@ function FormHandle(e) {
     const married = document.getElementById('married');
     const pet = document.getElementById('pet');
 
-    // muszaj-e
-    firstname2.notReqired = true;
 
     const lastnameValue = lastname.value;
     const firstname1Value = firstname1.value;
@@ -151,13 +149,26 @@ function FormHandle(e) {
         }
     
 
-    if(ValidateFields(
-        {
-        lastname: lastname,
-        firstname1: firstname1,
-        firstname2: firstname2,
-        pet: pet
-        }))
+
+        let lastnameOBJ = {
+            field: lastname
+
+        };
+        let firstname1OBJ = {
+            field: firstname1
+        };
+        let firstname2OBJ = {
+            field: firstname2,
+            notReqired: true
+        };
+        let petOBJ = {
+            field: pet
+        };
+
+        let fieldswhatevers = [lastnameOBJ, firstname1OBJ, firstname2OBJ, petOBJ ];
+        
+
+    if(ValidateFields(fieldswhatevers))
     {
         array.push(fields);      
     }
@@ -166,14 +177,15 @@ function FormHandle(e) {
 }
 
 
-function ValidateFields(fields){
-    let isGood = true;
+function ValidateFields(fieldswhatevers
 
-    for (const fieldName in fields) {
-        const field = fields[fieldName];
+){    let isGood = true;
+
+    for (const fieldName in fieldswhatevers) {
+        const field = fieldswhatevers[fieldName].field;
         errorField = field.parentElement.querySelector('.error');
 
-        if(field.value === '' && !field.notReqired){
+        if(field.value === '' && !fieldswhatevers[fieldName].notReqired){
             errorField.innerHTML = '*A ' + field.parentElement.querySelector('label').innerHTML + ' kötelező!';
             isGood = false;
         }
