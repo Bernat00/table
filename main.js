@@ -31,7 +31,7 @@ let array = [
 
 
 
-LoadTable();
+LoadTable(array);
 
 
 
@@ -76,5 +76,5 @@ function FormHandle(e) {
         array.push(fields);      
     }
   
-    LoadTable();
+    LoadTable(array);
 }

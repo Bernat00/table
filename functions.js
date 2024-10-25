@@ -14,7 +14,7 @@ function CreateTableCell(tagName, innerHTML = '', parent=document.body){
     return element;
 }
 
-function LoadTable(){
+function LoadTable(array){
     if(document.getElementById('table'))
         (document.getElementById('table')).remove();
 
@@ -30,12 +30,8 @@ function LoadTable(){
     CreateTableCell('th', 'Házas-e?', tableHeaderRow);
     CreateTableCell('th', 'Háziállat' ,tableHeaderRow);
 
-    table.id = 'table';
-        
-    
+
     for(let line of array){
-
-
         const row = document.createElement('tr');
         tableBody.appendChild(row);
 
@@ -43,18 +39,15 @@ function LoadTable(){
         CreateTableCell("td", line.lastname, row);
         const fn1 = CreateTableCell("td", line.firstname1, row);
                 
-        if(line.firstname2){
+        if(line.firstname2)
             CreateTableCell("td", line.firstname2, row);
-        }
-        else {
-            fn1.colSpan = 2;
-        }
+
+        else    fn1.colSpan = 2;
 
         CreateTableCell("td", line.married? 'Igen':'Nem', row);
         CreateTableCell("td", line.pet, row);
 
 
-    
         row.addEventListener('click', function (e) {
             let selected = tableBody.querySelector('.selected');
             if(selected)
@@ -73,7 +66,7 @@ function ValidateFields(fieldswhatevers){
 
 for (const fieldName in fieldswhatevers) {
     const field = fieldswhatevers[fieldName].field;
-    errorField = field.parentElement.querySelector('.error');
+    const errorField = field.parentElement.querySelector('.error');
 
     if(field.value === '' && !fieldswhatevers[fieldName].notReqired){
         errorField.innerHTML = '*A ' + field.parentElement.querySelector('label').innerHTML + ' kötelező!';
