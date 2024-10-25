@@ -55,7 +55,6 @@ function FormHandle(e) {
 
         let lastnameOBJ = {
             field: lastname
-
         };
         let firstname1OBJ = {
             field: firstname1

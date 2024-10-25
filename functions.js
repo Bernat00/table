@@ -18,19 +18,84 @@ function LoadTable(array){
     if(document.getElementById('table'))
         (document.getElementById('table')).remove();
 
+    const table = RenderTableBase(document.body);
 
-    const table = CreateHTMLElement('table', document.body, 'table');
-    const tableHeader = CreateHTMLElement('thead', table);
-    const tableBody = CreateHTMLElement('tbody', table);
+    RenderTableHeader(table.querySelector('thead'));
+    
+    RenderTableBodyAndAddEventListener(array, table.querySelector('tbody'));
+}
+
+
+function ValidateFields(fieldswhatevers){
+    let isGood = true;
+
+for (const fieldName in fieldswhatevers) {
+    const field = fieldswhatevers[fieldName].field;
+    const errorField = field.parentElement.querySelector('.error');
+
+    if(field.value === '' && !fieldswhatevers[fieldName].notReqired){
+        errorField.innerHTML = '*A ' + field.parentElement.querySelector('label').innerHTML + ' kötelező!';
+        isGood = false;
+    }
+    else
+        errorField.innerHTML = '';
+
+}
+
+    return isGood;
+}
+
+
+/**
+ * 
+ * @param {string} tag 
+ * @param {string} id
+ * @param {HTMLElement} parent 
+ * @returns
+ */
+function CreateHTMLElement(tag, parent, id=undefined){
+    const element = document.createElement(tag);
+    if(id != undefined)
+        element.id = id;
+    parent.appendChild(element);
+
+    return element;
+}
+
+
+/**
+ * 
+ * @param {HTMLElement} tableHeaderRow 
+ */
+function RenderTableHeader(tableHeader){
     const tableHeaderRow = CreateHTMLElement('tr', tableHeader);
-
-
     CreateTableCell('th', 'Vezetékév', tableHeaderRow);
     CreateTableCell('th', 'Keresztnév', tableHeaderRow).colSpan = 2;
     CreateTableCell('th', 'Házas-e?', tableHeaderRow);
     CreateTableCell('th', 'Háziállat' ,tableHeaderRow);
+}
+
+/**
+ * 
+ * @param {HTMLElement} parent 
+ * @returns table
+ */
+function RenderTableBase(parent){
+    const table = CreateHTMLElement('table', parent, 'table');
+    const tableHeader = CreateHTMLElement('thead', table);
+    CreateHTMLElement('tbody', table);
+    
+
+    return table;
+}
 
 
+/**
+ * 
+ * @param {Array} array 
+ * @param {HTMLElement} tableBody 
+ */
+function RenderTableBodyAndAddEventListener(array, tableBody){
     for(let line of array){
         const row = document.createElement('tr');
         tableBody.appendChild(row);
@@ -56,42 +121,4 @@ function LoadTable(array){
             e.currentTarget.classList.add('selected');
         });
     };
-
-
-}
-
-
-function ValidateFields(fieldswhatevers){
-    let isGood = true;
-
-for (const fieldName in fieldswhatevers) {
-    const field = fieldswhatevers[fieldName].field;
-    const errorField = field.parentElement.querySelector('.error');
-
-    if(field.value === '' && !fieldswhatevers[fieldName].notReqired){
-        errorField.innerHTML = '*A ' + field.parentElement.querySelector('label').innerHTML + ' kötelező!';
-        isGood = false;
-    }
-    else
-        errorField.innerHTML = '';
-}
-
-    return isGood;
-}
-
-
-/**
- * 
- * @param {string} tag 
- * @param {string} id
- * @param {HTMLElement} parent 
- * @returns
- */
-function CreateHTMLElement(tag, parent, id=undefined){
-    const element = document.createElement(tag);
-    if(id != undefined)
-        element.id = id;
-    parent.appendChild(element);
-
-    return element;
 }
