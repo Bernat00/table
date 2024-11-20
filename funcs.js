@@ -110,3 +110,41 @@ function errorHandle(inputs){
     return hasError;
 }
 
+function createForm(){
+    let form = document.createElement('form');
+    document.body.appendChild(form);
+    form.action = "#";
+    form.id = 'form';
+
+    form.appendChild(
+        createInputInDiv(form, 'text', 'Költő neve:', 'kolto_nev'),
+        createInputInDiv(form, 'text', 'Korszak:', 'korszak'),
+        createInputInDiv(form, 'text', 'Szerelme:', 'szerelem1'),
+        createInputInDiv(form, 'checkbox', 'Volt másik szerelme?', 'masodik'),
+        createInputInDiv(form, 'text', 'Szerelme:', 'szerelem2'),
+    )
+}
+
+function createInputInDiv(parent, type, text, nameAndId=text){
+    let div = document.createElement('div');
+
+    let label = document.createElement('label');
+    label.for = nameAndId;
+    label.innerText = text;
+
+    let input = document.createElement('input');
+    input.type = type;
+    input.name = nameAndId;
+    input.id = nameAndId;
+
+    let err = document.createElement('p');
+    err .classList.add('error');
+
+    parent.appendChild(div);
+    div.appendChild(label);
+    div.appendChild(document.createElement('br'));
+    div.appendChild(input);
+    div.appendChild(err);
+
+}
+
