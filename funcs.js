@@ -1,0 +1,112 @@
+function renderTable(){
+    const table = document.createElement('table');
+    createHeader(table);
+    createBody(table);
+
+    document.body.appendChild(table);
+}
+
+function createHeader(table){
+    const header = document.createElement('thead');
+    table.appendChild(header);
+
+    createTableCell("Szerelmek", "th")
+    createARow(header,
+        [
+            createTableCell("Szerző neve", "th"),
+            createTableCell("Korszak", "th"),
+            createTableCell("Szerelmek", "th", 2)
+        ]
+    );
+}
+
+function createBody(table){
+    const body = document.createElement('tbody');
+    body.id = 'tbody';
+    table.appendChild(body);
+
+    createARow(body,[
+        createTableCell('Balassi Bálint'),
+        createTableCell('reformáció'),
+        createTableCell('Losonczy Anna'),
+        createTableCell('Dobó Krisztina')
+    ]);
+
+    createARow(body,[
+        createTableCell('Csokonai Vitéz Mihály'),
+        createTableCell('felvilágosodás'),
+        createTableCell('Vajda Juliána', 'td', 2),
+    ]);
+    
+    createARow(body,[
+        createTableCell('Petőfi Sándor'),
+        createTableCell('magyar romantika'),
+        createTableCell('Mednyánszky Berta'),
+        createTableCell('Szendrey Júlia'),
+    ]);
+    
+    createARow(body,[
+        createTableCell('Ady Endre'),
+        createTableCell('20. század'),
+        createTableCell('Léda'),
+        createTableCell('Csinszka'),
+    ]);
+}
+
+function createARowOnlyByData(array){
+    let cellArray = [];
+     
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        cellArray.push(
+            createTableCell(element, 'td', (index == 2 && array.length ==3)? 2:1)
+        );
+    };
+
+    createARow(document.getElementById('tbody'), cellArray);
+}
+
+/**
+ * 
+ * @param {htmlElement} parent 
+ * @param {'td' | 'th'} type 
+ * @param {string} content 
+ * @returns
+ */
+function createTableCell(content, type='td', colSpan=1){
+    let tag = document.createElement(type);
+    tag.innerHTML = content;
+    tag.colSpan = colSpan
+    return tag;
+}
+
+function createARow(parent, cells, ){
+    let row = document.createElement('tr')
+    cells.forEach(cell => {
+        row.appendChild(cell);
+    });
+    parent.appendChild(row);
+}
+
+
+function errorHandle(inputs){
+    hasError = false;
+    for (let index = 0; index < 3; index++) {
+        const element = inputs[index];
+        if(!element.value){
+            let error = inputs[index].parentElement
+            error = error.querySelector('.error');
+            error.innerHTML = 'error';
+            hasError = true;
+        } 
+    }
+
+    if(inputs[4].checked && !inputs[5].value){
+        let error = input[5].parentElement.querrySelector('.error');
+        error.innerHTML = 'error';
+        hasError = true;
+    }
+
+    return hasError;
+}
+

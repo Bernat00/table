@@ -1,0 +1,15 @@
+tbody tr td:first-child, tbody tr td:last-child{
+    background-color: darkred;
+}
+
+thead tr th:nth-child(2){
+    background-color: darkred;
+}
+
+table  tr td, table tr th{
+    border: solid, 1px;
+}
+
+table{
+    border-collapse: collapse;
+}
