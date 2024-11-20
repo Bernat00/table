@@ -35,7 +35,7 @@ function createBody(table){
     createARow(body,[
         createTableCell('Csokonai Vitéz Mihály'),
         createTableCell('felvilágosodás'),
-        createTableCell('Vajda Juliána', 'td', 2),
+        createTableCell('Vajda Juliána', 'td', rowSpan=2),
     ]);
     
     createARow(body,[
@@ -73,10 +73,11 @@ function createARowOnlyByData(array){
  * @param {string} content 
  * @returns
  */
-function createTableCell(content, type='td', colSpan=1){
+function createTableCell(content, type='td', colSpan=null){
     let tag = document.createElement(type);
     tag.innerHTML = content;
-    tag.colSpan = colSpan
+    if(colSpan)
+        tag.colSpan = colSpan;
     return tag;
 }
 
@@ -86,6 +87,7 @@ function createARow(parent, cells, ){
         row.appendChild(cell);
     });
     parent.appendChild(row);
+
 }
 
 
@@ -123,8 +125,20 @@ function createForm(){
         createInputInDiv(form, 'checkbox', 'Volt másik szerelme?', 'masodik'),
         createInputInDiv(form, 'text', 'Szerelme:', 'szerelem2'),
     )
+
+    let button = document.createElement('button');
+    button.type = 'submit';
+    button.innerText = 'küld';
+    form.appendChild(button);
 }
 
+/**
+ * 
+ * @param {htmlElement} parent 
+ * @param {string} type 
+ * @param {string} text 
+ * @param {string} nameAndId 
+ */
 function createInputInDiv(parent, type, text, nameAndId=text){
     let div = document.createElement('div');
 
@@ -138,7 +152,7 @@ function createInputInDiv(parent, type, text, nameAndId=text){
     input.id = nameAndId;
 
     let err = document.createElement('p');
-    err .classList.add('error');
+    err.classList.add('error');
 
     parent.appendChild(div);
     div.appendChild(label);
@@ -146,5 +160,6 @@ function createInputInDiv(parent, type, text, nameAndId=text){
     div.appendChild(input);
     div.appendChild(err);
 
+    return div;
 }
 

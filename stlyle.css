@@ -10,6 +10,11 @@ table  tr td, table tr th{
     border: solid, 1px;
 }
 
+.error{
+    color: red;
+    font-size: 0.5em;
+}
+
 table{
     border-collapse: collapse;
 }
