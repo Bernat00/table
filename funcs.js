@@ -67,7 +67,7 @@ function createARowOnlyByData(array){
 }
 
 /**
- * 
+ * creates a table cell
  * @param {htmlElement} parent 
  * @param {'td' | 'th'} type 
  * @param {string} content 
@@ -136,20 +136,25 @@ function createForm(){
  * 
  * @param {htmlElement} parent 
  * @param {string} type 
- * @param {string} text 
+ * @param {string} labelText 
  * @param {string} nameAndId 
+ * @param {Array<htmlElement>} childrenOfInput
  */
-function createInputInDiv(parent, type, text, nameAndId=text){
+function createInputInDiv(parent, type, labelText, nameAndId=labelText, childrenOfInput=[]){
     let div = document.createElement('div');
 
     let label = document.createElement('label');
     label.for = nameAndId;
-    label.innerText = text;
+    label.innerText = labelText;
 
     let input = document.createElement('input');
     input.type = type;
     input.name = nameAndId;
     input.id = nameAndId;
+    if(childrenOfInput.length > 0)
+        childrenOfInput.forEach(child =>{
+            input.appendChild(child);
+    });
 
     let err = document.createElement('p');
     err.classList.add('error');
